@@ -18,4 +18,4 @@ MonoBehaviour:
     descricao: Restaura 50% da vida
     preco: 1500
     quantidade: 0
-  icone: {fileID: 0}
+  icone: {fileID: 21300000, guid: 5a106cb2e0f90df499f0aec25e199ef1, type: 3}

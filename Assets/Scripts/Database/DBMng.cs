@@ -56,5 +56,20 @@ public static class DBMng
         SalvarDadosJogador(jogador);
     }
 
+    public static void AdicionarNivel(int nivelId)
+    {
+        //Carregar os dados do jogador
+        Jogador jogador = CarregarDadosJogador();
+        if(jogador.niveisCompletados.Exists(nivel => nivel.id == nivelId))
+        {
+            Debug.LogWarning("O nível já foi completado anteriormente.");
+            return; // O nível já foi completado, não precisa adicionar novamente
+        }
+        //Adicionar o nível completado à lista de níveis do jogador
+        jogador.niveisCompletados.Add(new Nivel { id = nivelId });
+        //Salvar os dados atualizados do jogador
+        SalvarDadosJogador(jogador);
+
+    }
 
 }

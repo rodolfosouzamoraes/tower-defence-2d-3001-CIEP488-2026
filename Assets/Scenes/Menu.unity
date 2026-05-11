@@ -6798,7 +6798,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1207558791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1884273489}
+        m_TargetAssemblyTypeName: PannelNiveis, Assembly-CSharp
+        m_MethodName: NivelAnterior
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1207558791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9329,7 +9341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1884273488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9369,11 +9381,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d18e434a8886f40865cd1c6ce65339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  txtNomeNivel: {fileID: 0}
-  imgNivel: {fileID: 0}
-  levelCompletado: {fileID: 0}
-  niveis: []
-  btnIniciar: {fileID: 0}
+  txtNomeNivel: {fileID: 96492921}
+  imgNivel: {fileID: 1079509005}
+  levelCompletado: {fileID: 1846402107}
+  niveis:
+  - {fileID: 11400000, guid: 54d5c7b6ab25acb4b974feb14ed053b1, type: 2}
+  - {fileID: 11400000, guid: 7373bf611d466f24c89c69af45c9ac70, type: 2}
+  - {fileID: 11400000, guid: 41a91ed8f1a6b8d489687f7816374ab2, type: 2}
+  - {fileID: 11400000, guid: b591a43cdb5b210448f7818c814f6c0e, type: 2}
+  - {fileID: 11400000, guid: c7decd68dc437ce459c080387bf064f1, type: 2}
+  btnIniciar: {fileID: 130420258}
+  btnEsquerda: {fileID: 1207558788}
+  btnDireita: {fileID: 1220355674}
 --- !u!1 &1886999991
 GameObject:
   m_ObjectHideFlags: 0

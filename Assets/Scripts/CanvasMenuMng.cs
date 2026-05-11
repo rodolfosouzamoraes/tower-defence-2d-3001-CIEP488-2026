@@ -15,10 +15,20 @@ public class CanvasMenuMng : MonoBehaviour
     }
 
     private Jogador dadosJogador;
+    public Jogador DadosJogador { get { return dadosJogador; } }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        AtualizarDadosJogador();
+    }
+
+    public void AtualizarDadosJogador()
+    {
         dadosJogador = DBMng.CarregarDadosJogador();
+
+        //Atualizar os volumes do audio com os dados do jogador
+        Configuracao config = dadosJogador.configuracoes;
+        AudioMng.Instance.AtualizarVolumes(config.volumeMusica, config.volumeSFX);
     }
 
     // Update is called once per frame

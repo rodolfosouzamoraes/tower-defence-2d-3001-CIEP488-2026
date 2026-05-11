@@ -45,5 +45,16 @@ public static class DBMng
         PlayerPrefs.Save();
     }
 
+    public static void SalvarVolumes(float volumeMusica, float volumeSFX)
+    {
+        //Carregar os dados do jogador
+        Jogador jogador = CarregarDadosJogador();
+        //Atualizar os volumes na configuração do jogador
+        jogador.configuracoes.volumeMusica = volumeMusica;
+        jogador.configuracoes.volumeSFX = volumeSFX;
+        //Salvar os dados atualizados do jogador
+        SalvarDadosJogador(jogador);
+    }
+
 
 }

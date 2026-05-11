@@ -16,5 +16,4 @@ MonoBehaviour:
     id: 3
     nome: Nivel 3
     totalInimigos: 150
-    completado: 0
-    classificacao: 0
+  icone: {fileID: 21300000, guid: 03514ea0fe857b147801480b9518a21c, type: 3}

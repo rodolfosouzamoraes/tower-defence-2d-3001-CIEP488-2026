@@ -13,15 +13,16 @@ public class AudioMng : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public AudioSource audioMusica;
+    public AudioSource audioSFX;
+
+    public void AtualizarVolumes(float volumeMusica, float volumeSFX)
     {
-        
+        audioMusica.volume = volumeMusica;
+        audioSFX.volume = volumeSFX;
+
+        //Atualizar volumes na memoria
+        DBMng.SalvarVolumes(volumeMusica, volumeSFX);
     }
 }

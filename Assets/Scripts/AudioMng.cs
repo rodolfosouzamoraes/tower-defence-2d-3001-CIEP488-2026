@@ -1,24 +1,22 @@
 using UnityEngine;
 
-public class CanvasMenuMng : MonoBehaviour
+public class AudioMng : MonoBehaviour
 {
-    public static CanvasMenuMng Instance;
-
+    public static AudioMng Instance;
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             return;
         }
         Destroy(gameObject);
     }
-
-    private Jogador dadosJogador;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        dadosJogador = DBMng.CarregarDadosJogador();
+        
     }
 
     // Update is called once per frame

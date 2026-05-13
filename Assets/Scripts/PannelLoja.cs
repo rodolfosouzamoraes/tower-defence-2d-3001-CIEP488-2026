@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PannelLoja : MonoBehaviour
@@ -9,11 +10,14 @@ public class PannelLoja : MonoBehaviour
     public GameObject itemTorre;
     public Transform contentTorre;
     public Transform contentPoder;
+    public TextMeshProUGUI txtMoedas;
+    public GameObject pnlCompraTorre;
     private List<GameObject> listaTorres = new List<GameObject>(); //Referencia dos itens no content
     private List<GameObject> listaPoderes = new List<GameObject>();
-
+    private int moedasJogador;
     private void OnEnable()
     {
+        AtualizarMoedas();
         //Verificar se a lista de torres e poderes já foi preenchida
         if (listaTorres.Count > 0)
         {
@@ -48,5 +52,18 @@ public class PannelLoja : MonoBehaviour
             item.GetComponent<ItemPoder>().Init(poderSO.poder, poderSO.icone);
             listaPoderes.Add(item);
         }
+    }
+
+    public void ComprarTorre(Torre novaTorre)
+    {
+        pnlCompraTorre.SetActive(true);
+        pnlCompraTorre.GetComponent<PannelCompraTorre>().Init(novaTorre);
+    }
+
+    public void AtualizarMoedas()
+    {
+        CanvasMenuMng.Instance.AtualizarDadosJogador();
+        moedasJogador = CanvasMenuMng.Instance.DadosJogador.totalMoedas;
+        txtMoedas.text = $"${moedasJogador}";
     }
 }

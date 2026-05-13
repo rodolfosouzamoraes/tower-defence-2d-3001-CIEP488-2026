@@ -35,5 +35,6 @@ public class ItemTorre : MonoBehaviour
     public void Comprar()
     {
         //Lógica para pedir o jogador de confirmar a compra
+        GetComponentInParent<PannelLoja>().ComprarTorre(torre);
     }
 }

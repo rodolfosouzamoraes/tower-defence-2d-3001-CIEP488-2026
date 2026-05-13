@@ -21,7 +21,7 @@ public static class DBMng
                 niveisCompletados = new List<Nivel>(),
                 torresCompradas = new List<Torre>(),
                 poderesComprados = new List<Poder>(),
-                totalMoedas = 0
+                totalMoedas = 50000
             };
             //Configurar as variaveis com valores iniciais
             novoJogador.configuracoes.volumeMusica = 0.5f;
@@ -70,6 +70,39 @@ public static class DBMng
         //Salvar os dados atualizados do jogador
         SalvarDadosJogador(jogador);
 
+    }
+
+    public static bool ComprarTorre(Torre novaTorre)
+    {
+        try
+        {
+            //Buscar os dados do jogador
+            Jogador jogador = CarregarDadosJogador();
+            //Verificar se a torre já foi comprada
+            if (jogador.torresCompradas.Exists(torre => torre.id == novaTorre.id))
+            {
+                Debug.LogWarning("A torre já foi comprada anteriormente.");
+                return false;
+            }
+            //Verificar se o jogador tem moedas suficientes para comprar a torre
+            if (jogador.totalMoedas < novaTorre.preco)
+            {
+                Debug.LogWarning("Moedas insuficientes para comprar a torre.");
+                return false;
+            }
+            else
+            {
+                jogador.totalMoedas -= novaTorre.preco; //Deduzir o preço da torre das moedas do jogador
+                jogador.torresCompradas.Add(novaTorre); //Adicionar a torre comprada à lista de torres do jogador
+                SalvarDadosJogador(jogador); //Salvar os dados atualizados do jogador
+                return true;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Erro ao comprar torre: {ex.Message}");
+            return false;
+        }
     }
 
 }

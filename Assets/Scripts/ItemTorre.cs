@@ -10,6 +10,8 @@ public class ItemTorre : MonoBehaviour
     public TextMeshProUGUI txtVelocidade;
     public TextMeshProUGUI txtAtaque;
     public TextMeshProUGUI txtPreco;
+    public GameObject imgComprado;
+    public GameObject btnComprar;
     private Torre torre;
 
     /// <summary>
@@ -27,6 +29,12 @@ public class ItemTorre : MonoBehaviour
         txtVelocidade.text = $"Velocidade: {torre.velocidadeAtaque}";
         txtAtaque.text = $"Ataque: {torre.poderAtaque}";
         txtPreco.text = $"${torre.preco}";
+
+        if(DBMng.PossuiTorre(torre.id) == true)
+        {
+            imgComprado.SetActive(true);
+            btnComprar.SetActive(false);
+        }
     }
 
     /// <summary>

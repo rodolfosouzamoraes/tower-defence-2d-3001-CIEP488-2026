@@ -265,7 +265,9 @@ MonoBehaviour:
   contentTorre: {fileID: 1632616111}
   contentPoder: {fileID: 1521739178}
   txtMoedas: {fileID: 2064001045}
-  pnlCompraTorre: {fileID: 742832593}
+  pnlConfirmacaoCompra: {fileID: 742832593}
+  listaTorres: []
+  listaPoderes: []
 --- !u!1 &48766175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,7 +4691,7 @@ GameObject:
   - component: {fileID: 742832594}
   - component: {fileID: 742832595}
   m_Layer: 5
-  m_Name: pnlConfirmaCompraTorre
+  m_Name: pnlConfirmacaoCompra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

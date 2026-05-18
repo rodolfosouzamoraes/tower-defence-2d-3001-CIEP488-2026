@@ -12,8 +12,8 @@ public class PannelLoja : MonoBehaviour
     public Transform contentPoder;
     public TextMeshProUGUI txtMoedas;
     public GameObject pnlConfirmacaoCompra;
-    private List<GameObject> listaTorres = new List<GameObject>(); //Referencia dos itens no content
-    private List<GameObject> listaPoderes = new List<GameObject>();
+    public List<GameObject> listaTorres = new List<GameObject>(); //Referencia dos itens no content
+    public List<GameObject> listaPoderes = new List<GameObject>();
     private int moedasJogador;
     private void OnEnable()
     {
@@ -30,18 +30,18 @@ public class PannelLoja : MonoBehaviour
             foreach (GameObject item in listaTorres)
             {
                 Destroy(item);
-            }
-            listaTorres.Clear();
+            }            
         }
+        listaTorres.Clear();
 
         if (listaPoderes.Count > 0)
         {
             foreach (GameObject item in listaPoderes)
             {
                 Destroy(item);
-            }
-            listaPoderes.Clear();
+            }            
         }
+        listaPoderes.Clear();
 
         //preencher a lista com os dados atualizados
         foreach (TorreSO torreSO in torres)
@@ -53,8 +53,14 @@ public class PannelLoja : MonoBehaviour
 
         foreach (PoderSO poderSO in poderes)
         {
+            //Atribuir o poder ao player
+            DBMng.InserirPoderesPlayer(poderSO.poder);
+
+            //Atualizar a quantidade do poder na loja
+            Poder poderAtualizado = DBMng.BuscarPoderPlayer(poderSO.poder.id);
+
             GameObject item = Instantiate(itemPoder, contentPoder);
-            item.GetComponent<ItemPoder>().Init(poderSO.poder, poderSO.icone);
+            item.GetComponent<ItemPoder>().Init(poderAtualizado, poderSO.icone);
             listaPoderes.Add(item);
         }
     }

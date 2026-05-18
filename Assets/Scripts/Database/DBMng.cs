@@ -128,10 +128,12 @@ public static class DBMng
                 }
                 else
                 {
-                    novoPoder.quantidade = Constants.limiteMaximoPoderes; //Definir a quantidade do poder para o limite máximo
+                    jogador.poderesComprados.Remove(poderJogador); //Remover o poder antigo da lista de poderes do jogador para atualizar a quantidade
+                    poderJogador.quantidade = Constants.limiteMaximoPoderes; //Definir a quantidade do poder para o limite máximo
                     jogador.totalMoedas -= novoPoder.preco; //Deduzir o preço do poder das moedas do jogador
-                    jogador.poderesComprados.Add(novoPoder); //Adicionar o poder comprado à lista de poderes do jogador
+                    jogador.poderesComprados.Add(poderJogador); //Adicionar o poder atualizado à lista de poderes do jogador
                     SalvarDadosJogador(jogador); //Salvar os dados atualizados do jogador
+                    Debug.Log("Novo poder comprado!");
                     return true;
                 }
             }
@@ -170,4 +172,46 @@ public static class DBMng
         return true;
     }
 
+    public static void InserirPoderesPlayer(Poder poder)
+    {
+        //Buscar os dados do jogador
+        Jogador jogador = CarregarDadosJogador();
+
+        if (jogador.poderesComprados.Exists(p => p.id == poder.id))
+        {
+            Debug.LogWarning("O poder já existe na lista de poderes do jogador.");
+            return; // O poder já existe, não precisa adicionar novamente
+        }
+
+        //Definir a quantidade do  poder para 0
+        poder.quantidade = 0;   
+
+        //Adicionar o poder à lista de poderes do jogador
+        jogador.poderesComprados.Add(poder);
+
+        //Salvar os dados atualizados do jogador
+        SalvarDadosJogador(jogador);
+    }
+
+    public static Poder BuscarPoderPlayer(int idPoder)
+    {
+        Jogador jogador = CarregarDadosJogador();
+
+        Poder poderEncontrado = jogador.poderesComprados.Find(poder => poder.id == idPoder);
+
+        if (poderEncontrado == null)
+        {
+            Debug.LogWarning("O poder não foi encontrado na lista de poderes do jogador.");
+            return null;
+        }
+
+        return poderEncontrado;
+    }
+
+    public static bool PossuiTorre(int id)
+    {
+        Jogador jogador = CarregarDadosJogador();
+
+        return jogador.torresCompradas.Exists(torre => torre.id == id);
+    }
 }

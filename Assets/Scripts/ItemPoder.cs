@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,18 +8,26 @@ public class ItemPoder : MonoBehaviour
     public Image imgIcone;
     public TextMeshProUGUI txtQtd;
     public TextMeshProUGUI txtPreco;
+    public GameObject btnComprar;
     private Poder poder;
 
     public void Init(Poder novoPoder, Sprite icone)
     {
         poder = novoPoder;
         imgIcone.sprite = icone;
-        txtQtd.text = $"{poder.quantidade}/1";
+        txtQtd.text = $"{poder.quantidade}/{Constants.limiteMaximoPoderes}";
         txtPreco.text = $"${poder.preco}";
+
+        //Verificar se tem poder para bloquear o botao de compra
+        if(novoPoder.quantidade >= Constants.limiteMaximoPoderes)
+        {
+            btnComprar.SetActive(false);
+        }
     }
     
     public void Comprar()
     {
-
+        //Lógica para pedir o jogador de confirmar a compra
+        GetComponentInParent<PannelLoja>().ComprarPoder(poder);
     }
 }

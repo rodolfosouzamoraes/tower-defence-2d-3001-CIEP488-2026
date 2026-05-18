@@ -105,4 +105,69 @@ public static class DBMng
         }
     }
 
+    public static bool ComprarPoder(Poder novoPoder)
+    {
+        try
+        {
+            //Buscar os dados do jogador
+            Jogador jogador = CarregarDadosJogador();
+            
+            //Encontra o poder do jogador
+            Poder poderJogador = jogador.poderesComprados.Find(poder => poder.id == novoPoder.id);
+
+            if (poderJogador != null) { 
+                if(poderJogador.quantidade >= Constants.limiteMaximoPoderes)
+                {
+                    Debug.LogWarning("O poder já foi comprado anteriormente.");
+                    return false;
+                }
+                else if (jogador.totalMoedas < novoPoder.preco)
+                {
+                    Debug.LogWarning("Moedas insuficientes para comprar o poder.");
+                    return false;
+                }
+                else
+                {
+                    novoPoder.quantidade = Constants.limiteMaximoPoderes; //Definir a quantidade do poder para o limite máximo
+                    jogador.totalMoedas -= novoPoder.preco; //Deduzir o preço do poder das moedas do jogador
+                    jogador.poderesComprados.Add(novoPoder); //Adicionar o poder comprado à lista de poderes do jogador
+                    SalvarDadosJogador(jogador); //Salvar os dados atualizados do jogador
+                    return true;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("O poder não existe na lista!");
+                return false;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Erro ao comprar poder: {ex.Message}");
+            return false;
+        }
+    }
+
+    public static bool ConsumirPoder(Poder poderConsumido)
+    {
+        //Buscar os dados do jogador
+        Jogador jogador = CarregarDadosJogador();
+
+        //Verificar se o poder existe na lista de poderes do jogador
+        Poder poderExistente = jogador.poderesComprados.Find(poder => poder.id == poderConsumido.id);
+
+        if (poderExistente == null) {
+            Debug.LogWarning("O poder não foi encontrado na lista de poderes do jogador.");
+            return false;
+        }
+
+        //Remover o poder consumido da lista de poderes do jogador
+        jogador.poderesComprados.Remove(poderExistente);
+
+        //Salvar os dados atualizados do jogador
+        SalvarDadosJogador(jogador);
+
+        return true;
+    }
+
 }

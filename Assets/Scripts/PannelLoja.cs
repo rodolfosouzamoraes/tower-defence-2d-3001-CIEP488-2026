@@ -11,11 +11,16 @@ public class PannelLoja : MonoBehaviour
     public Transform contentTorre;
     public Transform contentPoder;
     public TextMeshProUGUI txtMoedas;
-    public GameObject pnlCompraTorre;
+    public GameObject pnlConfirmacaoCompra;
     private List<GameObject> listaTorres = new List<GameObject>(); //Referencia dos itens no content
     private List<GameObject> listaPoderes = new List<GameObject>();
     private int moedasJogador;
     private void OnEnable()
+    {
+        AtualizarLoja();
+    }
+
+    public void AtualizarLoja()
     {
         AtualizarMoedas();
         //Verificar se a lista de torres e poderes já foi preenchida
@@ -56,8 +61,14 @@ public class PannelLoja : MonoBehaviour
 
     public void ComprarTorre(Torre novaTorre)
     {
-        pnlCompraTorre.SetActive(true);
-        pnlCompraTorre.GetComponent<PannelCompraTorre>().Init(novaTorre);
+        pnlConfirmacaoCompra.SetActive(true);
+        pnlConfirmacaoCompra.GetComponent<PannelConfirmacaoCompra>().Init(novaTorre);
+    }
+
+    public void ComprarPoder(Poder novoPoder)
+    {
+        pnlConfirmacaoCompra.SetActive(true);
+        pnlConfirmacaoCompra.GetComponent<PannelConfirmacaoCompra>().Init(novoPoder);
     }
 
     public void AtualizarMoedas()

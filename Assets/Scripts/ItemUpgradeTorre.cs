@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +17,7 @@ public class ItemUpgradeTorre : MonoBehaviour
 
     public void Init(Torre novaTorre, Sprite icone)
     {
+        Debug.Log($"{JsonUtility.ToJson(novaTorre)} + {icone}");
         torre = novaTorre;
         imgIcone.sprite = icone;
         txtNivel.text = $"Nv.{torre.nivel}";

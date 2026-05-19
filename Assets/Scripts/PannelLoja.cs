@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PannelLoja : MonoBehaviour
 {
-    public PoderSO[] poderes;
-    public TorreSO[] torres;
+    
     public GameObject itemPoder;
     public GameObject itemTorre;
     public Transform contentTorre;
@@ -44,14 +43,14 @@ public class PannelLoja : MonoBehaviour
         listaPoderes.Clear();
 
         //preencher a lista com os dados atualizados
-        foreach (TorreSO torreSO in torres)
+        foreach (TorreSO torreSO in CanvasMenuMng.Instance.torres)
         {
             GameObject item = Instantiate(itemTorre, contentTorre);
             item.GetComponent<ItemTorre>().Init(torreSO.torre, torreSO.icone);
             listaTorres.Add(item);
         }
 
-        foreach (PoderSO poderSO in poderes)
+        foreach (PoderSO poderSO in CanvasMenuMng.Instance.poderes)
         {
             //Atribuir o poder ao player
             DBMng.InserirPoderesPlayer(poderSO.poder);

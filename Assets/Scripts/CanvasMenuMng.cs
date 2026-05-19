@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasMenuMng : MonoBehaviour
@@ -15,6 +16,8 @@ public class CanvasMenuMng : MonoBehaviour
     }
 
     private Jogador dadosJogador;
+    public List<PoderSO> poderes;
+    public List<TorreSO> torres;
     public Jogador DadosJogador { get { return dadosJogador; } }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

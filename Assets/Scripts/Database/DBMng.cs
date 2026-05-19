@@ -214,4 +214,59 @@ public static class DBMng
 
         return jogador.torresCompradas.Exists(torre => torre.id == id);
     }
+
+    public static int TotalTorresAtivas()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        if(jogador == null)
+        {
+            return 0;
+        }
+        //Contando quantas torres estão ativas
+        return jogador.torresCompradas.FindAll(torre => torre.estaAtivo).Count;
+    }
+
+    public static bool AtivarTorre(int idTorre)
+    {
+        Jogador jogador = CarregarDadosJogador();
+
+        foreach (Torre torre in jogador.torresCompradas)
+        {
+            if (torre.id == idTorre)
+            {
+                torre.estaAtivo = true; // Ativar a torre
+                return true; // Retornar true para indicar que a torre foi ativada
+            }
+        }
+
+        return false; // Retornar false se a torre não foi encontrada
+    }
+
+    public static bool DesativarTorre(int idTorre)
+    {
+        Jogador jogador = CarregarDadosJogador();
+
+        foreach (Torre torre in jogador.torresCompradas)
+        {
+            if (torre.id == idTorre)
+            {
+                torre.estaAtivo = false; // Desativa a torre
+                return true; // Retornar true para indicar que a torre foi desativada
+            }
+        }
+
+        return false; // Retornar false se a torre não foi encontrada
+    }
+
+    public static int ObterMoedasPlayer()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        return jogador.totalMoedas;
+    }
+
+    public static List<Torre> ObterTorresPlayer()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        return jogador.torresCompradas;
+    }
 }

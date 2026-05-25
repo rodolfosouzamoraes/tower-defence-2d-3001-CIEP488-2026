@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public static class DBMng
@@ -230,11 +231,12 @@ public static class DBMng
     {
         Jogador jogador = CarregarDadosJogador();
 
-        foreach (Torre torre in jogador.torresCompradas)
+        for(int i = 0; i < jogador.torresCompradas.Count; i++)
         {
-            if (torre.id == idTorre)
+            if (jogador.torresCompradas[i].id == idTorre)
             {
-                torre.estaAtivo = true; // Ativar a torre
+                jogador.torresCompradas[i].estaAtivo = true; // Ativar a torre
+                SalvarDadosJogador(jogador);
                 return true; // Retornar true para indicar que a torre foi ativada
             }
         }
@@ -246,12 +248,13 @@ public static class DBMng
     {
         Jogador jogador = CarregarDadosJogador();
 
-        foreach (Torre torre in jogador.torresCompradas)
+        for (int i = 0; i < jogador.torresCompradas.Count; i++)
         {
-            if (torre.id == idTorre)
+            if (jogador.torresCompradas[i].id == idTorre)
             {
-                torre.estaAtivo = false; // Desativa a torre
-                return true; // Retornar true para indicar que a torre foi desativada
+                jogador.torresCompradas[i].estaAtivo = false; // Desativar a torre
+                SalvarDadosJogador(jogador);
+                return true; // Retornar true para indicar que a torre foi ativada
             }
         }
 

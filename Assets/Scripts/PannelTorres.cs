@@ -46,4 +46,36 @@ public class PannelTorres : MonoBehaviour
             listaTorres.Add(item);
         }
     }
+
+    public void AtivarOuDesativarTorre(ItemUpgradeTorre itemTorre)
+    {
+        //Verificar se a torre está ativa
+        if (itemTorre.Torre.estaAtivo == true)
+        {
+            //Desativar a torre
+            Torre torreAtualizada = itemTorre.Torre;
+            torreAtualizada.estaAtivo = false;
+            DBMng.DesativarTorre(torreAtualizada.id);
+            itemTorre.AtualizarTorre(torreAtualizada);
+            totalTorresAtivas--;
+            txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.limiteMaximoTorresAtivas}";
+        }
+        else
+        {
+            //Verificar o limite de torres ativas
+            if (totalTorresAtivas < Constants.limiteMaximoTorresAtivas)
+            {
+                totalTorresAtivas++;
+                txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.limiteMaximoTorresAtivas}";
+                Torre torreAtualizada = itemTorre.Torre;
+                torreAtualizada.estaAtivo = true;
+                DBMng.AtivarTorre(torreAtualizada.id);
+                itemTorre.AtualizarTorre(torreAtualizada);
+            }
+            else
+            {
+                //Informar ao jogador que ele atingiu o limite de torres ativas
+            }
+        }
+    }
 }

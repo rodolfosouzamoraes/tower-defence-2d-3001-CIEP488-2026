@@ -14,12 +14,22 @@ public class ItemUpgradeTorre : MonoBehaviour
     public Color corOn;
     public Color corOff;
     private Torre torre;
+    public Torre Torre { set { torre = value; } get { return torre; } }
 
     public void Init(Torre novaTorre, Sprite icone)
     {
-        Debug.Log($"{JsonUtility.ToJson(novaTorre)} + {icone}");
-        torre = novaTorre;
         imgIcone.sprite = icone;
+        AtualizarTorre(novaTorre);        
+    }
+
+    public void AtivarOuDesativar()
+    {
+        GetComponentInParent<PannelTorres>().AtivarOuDesativarTorre(this);
+    }
+
+    public void AtualizarTorre(Torre torreAtualizada)
+    {
+        torre = torreAtualizada;
         txtNivel.text = $"Nv.{torre.nivel}";
         txtNome.text = torre.nome;
         txtVelocidade.text = $"Velocidade: {torre.velocidadeAtaque}";
@@ -35,10 +45,5 @@ public class ItemUpgradeTorre : MonoBehaviour
             txtOnOff.text = "Ativar";
             imgBotaoOnOff.color = corOff;
         }
-    }
-
-    public void AtivarOuDesativar()
-    {
-
     }
 }

@@ -78,8 +78,7 @@ public class PannelLoja : MonoBehaviour
 
     public void AtualizarMoedas()
     {
-        CanvasMenuMng.Instance.AtualizarDadosJogador();
-        moedasJogador = CanvasMenuMng.Instance.DadosJogador.totalMoedas;
+        moedasJogador = DBMng.ObterMoedasPlayer();
         txtMoedas.text = $"${moedasJogador}";
     }
 }

@@ -8,7 +8,7 @@ public class PannelConfig : MonoBehaviour
 
     private void OnEnable()
     {
-        Configuracao config = CanvasMenuMng.Instance.DadosJogador.configuracoes;
+        Configuracao config = DBMng.ObterConfiguracao();
 
         sldMusica.value = config.volumeMusica;
         sldSFX.value = config.volumeSFX;
@@ -16,11 +16,9 @@ public class PannelConfig : MonoBehaviour
     public void AlterarVolumeSliderMusica()
     {
         DBMng.SalvarVolumes(sldMusica.value, sldSFX.value);
-        CanvasMenuMng.Instance.AtualizarDadosJogador();
     }
     public void AlterarVolumeSliderSFX()
     {
         DBMng.SalvarVolumes(sldMusica.value, sldSFX.value);
-        CanvasMenuMng.Instance.AtualizarDadosJogador();
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,61 +14,59 @@ public class PannelNiveis : MonoBehaviour
     public GameObject btnEsquerda;
     public GameObject btnDireita;
     private int idNivelAtual;
-    private List<NivelSO> listaNiveis = new List<NivelSO>(); 
+    private List<Nivel> listaNiveisDisponiveis = new List<Nivel>();
+    
 
     private void OnEnable()
     {
         //limpar a lista de niveis para atualizar com novos valores
-        listaNiveis.Clear();
+        listaNiveisDisponiveis.Clear();
 
         //Pegar os niveis completados do jogador.
-        Nivel[] niveisJogador = CanvasMenuMng.Instance.DadosJogador.niveisCompletados.ToArray();
+        Nivel[] niveisCompletadosJogador = DBMng.NiveisCompletados();
 
-        for(int i = 0; i < niveis.Length; i++) //Percorrendo todos os níveis SO
+        for(int i = 0; i < niveis.Length; i++)
         {
-            for(int j = 0; j < niveisJogador.Length; j++) //Percorrer todos os níveis que o jogador já completou
+            //Verificar se o nivel é o primeiro ou se o nivel anterior foi completado
+            Nivel nivelEncontrado = niveisCompletadosJogador.ToList().Find(nivel => nivel.id == niveis[i].nivel.id);
+            if (nivelEncontrado != null)
             {
-                if (niveis[i].nivel.id == niveisJogador[j].id) //Comparar com o nivel SO com o que o jogador já jogou
-                {                    
-                    niveis[i].nivel.completado = true;//Marcar como habilitado o nivel
-                    listaNiveis.Add(niveis[i]); //Adicionar nivel que o jogador já jogou
-                    break;
-                }
+                listaNiveisDisponiveis.Add(nivelEncontrado);
+            }
+            else
+            {
+                listaNiveisDisponiveis.Add(niveis[i].nivel);
+                break;
             }
         }
 
-        if(listaNiveis.Count == 0) // Verificar se não tem nenhum nivel completado
+        Nivel ultimoNivelDaLista = listaNiveisDisponiveis[listaNiveisDisponiveis.Count - 1];
+        idNivelAtual = ultimoNivelDaLista.id;
+        txtNomeNivel.text = ultimoNivelDaLista.nome;
+        imgNivel.sprite = niveis.ToList().Find(nv => nv.nivel.id == ultimoNivelDaLista.id).icone;
+        levelCompletado.SetActive(ultimoNivelDaLista.completado);
+        //Configurar os botões de navegação
+        btnDireita.SetActive(false);
+        if (idNivelAtual == 1)
         {
-            idNivelAtual = niveis[0].nivel.id;
-            txtNomeNivel.text = niveis[0].nivel.nome;
-            imgNivel.sprite = niveis[0].icone;
-            levelCompletado.SetActive(false);
+            btnEsquerda.SetActive(false);
         }
-        else if (listaNiveis.Count == niveis.Length) // verificar se já desbloqueou todos os niveis
+        else
         {
-            idNivelAtual = niveis[listaNiveis.Count-1].nivel.id;
-            txtNomeNivel.text = niveis[listaNiveis.Count-1].nivel.nome;
-            imgNivel.sprite = niveis[listaNiveis.Count-1].icone;
-            levelCompletado.SetActive(true);
+            btnEsquerda.SetActive(true);
         }
-        else // Mostra o proximo nível
-        {
-            idNivelAtual = niveis[listaNiveis.Count].nivel.id;
-            txtNomeNivel.text = niveis[listaNiveis.Count].nivel.nome;
-            imgNivel.sprite = niveis[listaNiveis.Count].icone;
-            levelCompletado.SetActive(false);
-        }
-        
+
     }
-    
+
     public void NivelAnterior()
     {
         if(idNivelAtual-1 > 0)
         {
             idNivelAtual--;
-            txtNomeNivel.text = listaNiveis[idNivelAtual - 1].nivel.nome;
-            imgNivel.sprite = listaNiveis[idNivelAtual - 1].icone;
-            levelCompletado.SetActive(listaNiveis[idNivelAtual - 1].nivel.completado);
+            NivelSO ultimoNivelDaLista = niveis.ToList().Find(nv => nv.nivel.id == listaNiveisDisponiveis[idNivelAtual - 1].id);
+            txtNomeNivel.text = ultimoNivelDaLista.nivel.nome;
+            imgNivel.sprite = ultimoNivelDaLista.icone;
+            levelCompletado.SetActive(listaNiveisDisponiveis[idNivelAtual - 1].completado);
             //Habilitar o botão posterior
             btnDireita.SetActive(true);
             if(idNivelAtual == 1)
@@ -79,6 +78,19 @@ public class PannelNiveis : MonoBehaviour
 
     public void NivelPosterior()
     {
-
+        if (idNivelAtual <= listaNiveisDisponiveis.Count)
+        {
+            idNivelAtual++;
+            NivelSO ultimoNivelDaLista = niveis.ToList().Find(nv => nv.nivel.id == listaNiveisDisponiveis[idNivelAtual - 1].id);
+            txtNomeNivel.text = ultimoNivelDaLista.nivel.nome;
+            imgNivel.sprite = ultimoNivelDaLista.icone;
+            levelCompletado.SetActive(listaNiveisDisponiveis[idNivelAtual - 1].completado);
+            //Habilitar o botão posterior
+            btnEsquerda.SetActive(true);
+            if (idNivelAtual == listaNiveisDisponiveis.Count)
+            {
+                btnDireita.SetActive(false);
+            }
+        }
     }
 }

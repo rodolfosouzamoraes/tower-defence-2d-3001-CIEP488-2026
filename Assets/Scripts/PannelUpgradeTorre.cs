@@ -29,7 +29,8 @@ public class PannelUpgradeTorre : MonoBehaviour
             torreAtualizada.velocidadeAtaque *= 1.2f; //Aumenta a velocidade de ataque em 20%
             torreAtualizada.poderAtaque *= 1.1f; //Aumenta o poder de ataque em 10%
             //Salvar na memoria
-            DBMng.AtualizarNivelTorre(torreAtualizada);
+            DBMng.AtualizarNivelTorre(torreAtualizada, custoUpgrade);
+
             //Ocultar o painel e atualizar as torres no painel torres
             pnlTorres.Init();
             gameObject.SetActive(false);

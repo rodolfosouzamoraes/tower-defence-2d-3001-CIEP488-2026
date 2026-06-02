@@ -67,7 +67,7 @@ public static class DBMng
             return; // O nível já foi completado, não precisa adicionar novamente
         }
         //Adicionar o nível completado à lista de níveis do jogador
-        jogador.niveisCompletados.Add(new Nivel { id = nivelId });
+        jogador.niveisCompletados.Add(new Nivel { id = nivelId, completado = true });
         //Salvar os dados atualizados do jogador
         SalvarDadosJogador(jogador);
 
@@ -273,7 +273,7 @@ public static class DBMng
         return jogador.torresCompradas;
     }
 
-    public static void AtualizarNivelTorre(Torre torreAtualizada)
+    public static void AtualizarNivelTorre(Torre torreAtualizada, int custoUpgrade)
     {
         Jogador jogador = CarregarDadosJogador();
         for (int i = 0; i < jogador.torresCompradas.Count; i++)
@@ -281,9 +281,22 @@ public static class DBMng
             if (jogador.torresCompradas[i].id == torreAtualizada.id)
             {
                 jogador.torresCompradas[i] = torreAtualizada; // Atualizar a torre com os novos dados
+                jogador.totalMoedas -= custoUpgrade; // Deduzir o custo do upgrade das moedas do jogador
                 SalvarDadosJogador(jogador);
                 return; // Retornar após atualizar a torre
             }
         }
+    }
+
+    public static Configuracao ObterConfiguracao()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        return jogador.configuracoes;
+    }
+
+    public static Nivel[] NiveisCompletados()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        return jogador.niveisCompletados.ToArray();
     }
 }

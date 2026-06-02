@@ -16,4 +16,5 @@ MonoBehaviour:
     id: 1
     nome: Nivel 1
     totalInimigos: 75
+    completado: 0
   icone: {fileID: 21300000, guid: 229a2d7929188ea438fa244574abdeb7, type: 3}

@@ -9,6 +9,7 @@ public class PannelTorres : MonoBehaviour
     public TextMeshProUGUI txtQtdTorresAtivas;
     public GameObject itemUpgradeTorre;
     public TextMeshProUGUI txtMoedas;
+    public PannelUpgradeTorre pnlUpgradeTorre;
     private List<GameObject> listaTorres = new List<GameObject>();
     int totalTorresAtivas;
     int totalMoedas;
@@ -21,7 +22,7 @@ public class PannelTorres : MonoBehaviour
     {
         //Configura a informação das torres ativas
         totalTorresAtivas = DBMng.TotalTorresAtivas();
-        txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.limiteMaximoTorresAtivas}";
+        txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.LIMITE_MAXIMO_TORRES_ATIVAS}";
 
         //Configura a informação das moedas
         totalMoedas = DBMng.ObterMoedasPlayer();
@@ -58,15 +59,15 @@ public class PannelTorres : MonoBehaviour
             DBMng.DesativarTorre(torreAtualizada.id);
             itemTorre.AtualizarTorre(torreAtualizada);
             totalTorresAtivas--;
-            txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.limiteMaximoTorresAtivas}";
+            txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.LIMITE_MAXIMO_TORRES_ATIVAS}";
         }
         else
         {
             //Verificar o limite de torres ativas
-            if (totalTorresAtivas < Constants.limiteMaximoTorresAtivas)
+            if (totalTorresAtivas < Constants.LIMITE_MAXIMO_TORRES_ATIVAS)
             {
                 totalTorresAtivas++;
-                txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.limiteMaximoTorresAtivas}";
+                txtQtdTorresAtivas.text = $"{totalTorresAtivas}/{Constants.LIMITE_MAXIMO_TORRES_ATIVAS}";
                 Torre torreAtualizada = itemTorre.Torre;
                 torreAtualizada.estaAtivo = true;
                 DBMng.AtivarTorre(torreAtualizada.id);
@@ -77,5 +78,11 @@ public class PannelTorres : MonoBehaviour
                 //Informar ao jogador que ele atingiu o limite de torres ativas
             }
         }
+    }
+
+    public void AbrirPannelUpgradeTorre(Torre torre)
+    {
+        pnlUpgradeTorre.gameObject.SetActive(true);
+        pnlUpgradeTorre.Init(torre);        
     }
 }

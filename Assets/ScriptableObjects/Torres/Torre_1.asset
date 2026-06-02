@@ -19,5 +19,5 @@ MonoBehaviour:
     poderAtaque: 100
     nivel: 1
     estaAtivo: 0
-    preco: 0
+    preco: 100
   icone: {fileID: 21300000, guid: 3684b84b68ac0ae4783d165edd883c69, type: 3}

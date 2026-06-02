@@ -117,7 +117,7 @@ public static class DBMng
             Poder poderJogador = jogador.poderesComprados.Find(poder => poder.id == novoPoder.id);
 
             if (poderJogador != null) { 
-                if(poderJogador.quantidade >= Constants.limiteMaximoPoderes)
+                if(poderJogador.quantidade >= Constants.LIMITE_MAXIMO_PODERES)
                 {
                     Debug.LogWarning("O poder já foi comprado anteriormente.");
                     return false;
@@ -130,7 +130,7 @@ public static class DBMng
                 else
                 {
                     jogador.poderesComprados.Remove(poderJogador); //Remover o poder antigo da lista de poderes do jogador para atualizar a quantidade
-                    poderJogador.quantidade = Constants.limiteMaximoPoderes; //Definir a quantidade do poder para o limite máximo
+                    poderJogador.quantidade = Constants.LIMITE_MAXIMO_PODERES; //Definir a quantidade do poder para o limite máximo
                     jogador.totalMoedas -= novoPoder.preco; //Deduzir o preço do poder das moedas do jogador
                     jogador.poderesComprados.Add(poderJogador); //Adicionar o poder atualizado à lista de poderes do jogador
                     SalvarDadosJogador(jogador); //Salvar os dados atualizados do jogador
@@ -271,5 +271,19 @@ public static class DBMng
     {
         Jogador jogador = CarregarDadosJogador();
         return jogador.torresCompradas;
+    }
+
+    public static void AtualizarNivelTorre(Torre torreAtualizada)
+    {
+        Jogador jogador = CarregarDadosJogador();
+        for (int i = 0; i < jogador.torresCompradas.Count; i++)
+        {
+            if (jogador.torresCompradas[i].id == torreAtualizada.id)
+            {
+                jogador.torresCompradas[i] = torreAtualizada; // Atualizar a torre com os novos dados
+                SalvarDadosJogador(jogador);
+                return; // Retornar após atualizar a torre
+            }
+        }
     }
 }

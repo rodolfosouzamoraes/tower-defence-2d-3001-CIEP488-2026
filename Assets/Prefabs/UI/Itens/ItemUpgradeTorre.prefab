@@ -333,9 +333,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ItemTorre, Assembly-CSharp
-        m_MethodName: Comprar
+      - m_Target: {fileID: 2748402621926588024}
+        m_TargetAssemblyTypeName: ItemUpgradeTorre, Assembly-CSharp
+        m_MethodName: MelhorarTorre
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -586,6 +586,7 @@ MonoBehaviour:
   imgBotaoOnOff: {fileID: 8094500909582684347}
   corOn: {r: 1, g: 0, b: 0.77646255, a: 1}
   corOff: {r: 0, g: 0.61960787, b: 1, a: 1}
+  btnUpgrade: {fileID: 1033772679539699855}
 --- !u!1 &5161672500349105357
 GameObject:
   m_ObjectHideFlags: 0

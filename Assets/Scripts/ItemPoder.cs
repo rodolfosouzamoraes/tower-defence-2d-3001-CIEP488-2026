@@ -15,11 +15,11 @@ public class ItemPoder : MonoBehaviour
     {
         poder = novoPoder;
         imgIcone.sprite = icone;
-        txtQtd.text = $"{poder.quantidade}/{Constants.limiteMaximoPoderes}";
+        txtQtd.text = $"{poder.quantidade}/{Constants.LIMITE_MAXIMO_PODERES}";
         txtPreco.text = $"${poder.preco}";
 
         //Verificar se tem poder para bloquear o botao de compra
-        if(novoPoder.quantidade >= Constants.limiteMaximoPoderes)
+        if(novoPoder.quantidade >= Constants.LIMITE_MAXIMO_PODERES)
         {
             btnComprar.SetActive(false);
         }

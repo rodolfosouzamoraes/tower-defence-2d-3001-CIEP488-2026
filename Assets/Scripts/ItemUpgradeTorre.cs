@@ -13,6 +13,7 @@ public class ItemUpgradeTorre : MonoBehaviour
     public Image imgBotaoOnOff;
     public Color corOn;
     public Color corOff;
+    public GameObject btnUpgrade;
     private Torre torre;
     public Torre Torre { set { torre = value; } get { return torre; } }
 
@@ -27,13 +28,28 @@ public class ItemUpgradeTorre : MonoBehaviour
         GetComponentInParent<PannelTorres>().AtivarOuDesativarTorre(this);
     }
 
+    public void MelhorarTorre()
+    {
+        GetComponentInParent<PannelTorres>().AbrirPannelUpgradeTorre(torre);
+    }
+
     public void AtualizarTorre(Torre torreAtualizada)
     {
         torre = torreAtualizada;
-        txtNivel.text = $"Nv.{torre.nivel}";
+        if(torre.nivel == Constants.NIVEL_MAXIMO_TORRE)
+        {
+            btnUpgrade.SetActive(false);
+            txtNivel.text = "Nv.MAX";
+        }
+        else
+        {
+            btnUpgrade.SetActive(true);
+            txtNivel.text = $"Nv.{torre.nivel}";
+        }
+        
         txtNome.text = torre.nome;
-        txtVelocidade.text = $"Velocidade: {torre.velocidadeAtaque}";
-        txtAtaque.text = $"Ataque: {torre.poderAtaque}";
+        txtVelocidade.text = $"Velocidade: {(int)torre.velocidadeAtaque}";
+        txtAtaque.text = $"Ataque: {(int)torre.poderAtaque}";
 
         if (torre.estaAtivo == true)
         {

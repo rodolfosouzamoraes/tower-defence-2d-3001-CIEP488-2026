@@ -1,22 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasMenuMng : MonoBehaviour
 {
-    public static CanvasMenuMng Instance;
-
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            return;
-        }
-        Destroy(gameObject);
-    }
-
-    public List<PoderSO> poderes;
-    public List<TorreSO> torres;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

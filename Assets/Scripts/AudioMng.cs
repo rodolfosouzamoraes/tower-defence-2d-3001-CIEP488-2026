@@ -2,18 +2,6 @@ using UnityEngine;
 
 public class AudioMng : MonoBehaviour
 {
-    public static AudioMng Instance;
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            return;
-        }
-        Destroy(gameObject);
-    }
-
     public AudioSource audioMusica;
     public AudioSource audioSFX;
 

@@ -16,9 +16,11 @@ public class PannelConfig : MonoBehaviour
     public void AlterarVolumeSliderMusica()
     {
         DBMng.SalvarVolumes(sldMusica.value, sldSFX.value);
+        GameManager.Audios.AtualizarVolumes(sldMusica.value, sldSFX.value);
     }
     public void AlterarVolumeSliderSFX()
     {
         DBMng.SalvarVolumes(sldMusica.value, sldSFX.value);
+        GameManager.Audios.AtualizarVolumes(sldMusica.value, sldSFX.value);
     }
 }

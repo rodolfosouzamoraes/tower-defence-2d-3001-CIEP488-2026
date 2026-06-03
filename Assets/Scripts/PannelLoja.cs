@@ -43,14 +43,14 @@ public class PannelLoja : MonoBehaviour
         listaPoderes.Clear();
 
         //preencher a lista com os dados atualizados
-        foreach (TorreSO torreSO in CanvasMenuMng.Instance.torres)
+        foreach (TorreSO torreSO in GameManager.GameData.torres)
         {
             GameObject item = Instantiate(itemTorre, contentTorre);
             item.GetComponent<ItemTorre>().Init(torreSO.torre, torreSO.icone);
             listaTorres.Add(item);
         }
 
-        foreach (PoderSO poderSO in CanvasMenuMng.Instance.poderes)
+        foreach (PoderSO poderSO in GameManager.GameData.poderes)
         {
             //Atribuir o poder ao player
             DBMng.InserirPoderesPlayer(poderSO.poder);

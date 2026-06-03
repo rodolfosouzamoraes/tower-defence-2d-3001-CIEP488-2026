@@ -40,7 +40,7 @@ public class PannelTorres : MonoBehaviour
         foreach (Torre torre in listaTorresPlayer)
         {
             GameObject item = Instantiate(itemUpgradeTorre, contentTorres);
-            TorreSO torreSO = CanvasMenuMng.Instance.torres.ToList().Find(torreSO => torreSO.torre.id == torre.id);
+            TorreSO torreSO = GameManager.GameData.torres.ToList().Find(torreSO => torreSO.torre.id == torre.id);
             Sprite icone = torreSO.icone;
 
             item.GetComponent<ItemUpgradeTorre>().Init(torre, icone);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class DBMng
@@ -270,6 +271,12 @@ public static class DBMng
     {
         Jogador jogador = CarregarDadosJogador();
         return jogador.torresCompradas;
+    }
+
+    public static List<Torre> ObterTorresAtivasPlayer()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        return jogador.torresCompradas.Where(torre => torre.estaAtivo == true).ToList();
     }
 
     public static void AtualizarNivelTorre(Torre torreAtualizada, int custoUpgrade)

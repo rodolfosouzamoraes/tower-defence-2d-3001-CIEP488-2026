@@ -25,8 +25,18 @@ public class ItemTorreGameplay : MonoBehaviour
         txtVelocidade.text = $"Velocidade: {(int)torre.velocidadeAtaque}";
         txtAtaque.text = $"Ataque: {(int)torre.poderAtaque}";
         txtPreco.text = $"${torre.preco}";
-        //imgBotaoCompra.color =
     }
-    
+
+    private void Update()
+    {
+        if(CanvasGameMng.PannelGamePlay.ObterMoedasTotais() >= torre.preco)
+        {
+            imgBotaoCompra.color = corOn;
+        }
+        else
+        {
+            imgBotaoCompra.color = corOff;
+        }
+    }
 
 }

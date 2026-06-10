@@ -1,0 +1,34 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class CanvasMapaMng : MonoBehaviour
+{
+    public static CanvasMapaMng Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+    }
+    private List<BotaoTorreMapa> todasAsTorresDoMapa;
+    private int idTorreSelecionada;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        todasAsTorresDoMapa = GetComponentsInChildren<BotaoTorreMapa>().ToList();
+    }
+
+    public void ExibirTorresDisponiveis(int idTorre)
+    {
+        CanvasGameMng.Instance.AtivarPainelEspecifico(EnumPaineisGame.EscolhaTorre);
+        idTorreSelecionada = idTorre;
+    }
+}

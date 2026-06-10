@@ -14,10 +14,27 @@ public class CanvasGameMng : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    public GameObject[] paineis;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        AtivarPainel(EnumPaineisGame.Gameplay);
+    }
+
+    public void AtivarPainel(EnumPaineisGame painel)
+    {
+        foreach(GameObject pnl in paineis)
+        {
+            pnl.SetActive(false);
+        }
+        paineis[(int)painel].SetActive(true);
+    }
+
+    public void AtivarPainelEspecifico(EnumPaineisGame painel)
+    {
+        paineis[(int)painel].SetActive(true);
     }
 
     // Update is called once per frame

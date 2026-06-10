@@ -33,6 +33,11 @@ public class PannelGamePlay : MonoBehaviour
         return moedasAtuaisNivel;
     }
 
+    public void DebitarMoedas(int debito)
+    {
+        moedasAtuaisNivel -= debito;
+    }
+
     // Update is called once per frame
     void Update()
     {

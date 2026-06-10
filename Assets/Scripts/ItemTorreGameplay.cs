@@ -39,4 +39,17 @@ public class ItemTorreGameplay : MonoBehaviour
         }
     }
 
+    public void ComprarTorre()
+    {
+        //Verificar se tem moeda suficiente
+        int moedasAtuais = CanvasGameMng.PannelGamePlay.ObterMoedasTotais();
+        if (moedasAtuais >= torre.preco)
+        {
+            //Comprar torre
+            //Debitar as moedas
+            //Ativar a torre no botão que solicitou a nova torre
+
+        }
+
+    }
 }

@@ -6,12 +6,25 @@ public class BotaoTorreMapa : MonoBehaviour
     public int id;
     public Image iconeTorre;
     public GameObject txtPlus;
+    public GameObject pnlDestruirTorre;
     private Torre torreAtiva;
     private bool estaComTorre;
 
+    public bool EstaComTorre
+    {
+        get { return estaComTorre; }
+    }
+
     public void AbrirSelecaoTorres()
     {
-        CanvasMapaMng.Instance.ExibirTorresDisponiveis(id);
+        if(estaComTorre == false)
+        {
+            CanvasMapaMng.Instance.ExibirTorresDisponiveis(id);
+        }
+        else
+        {
+            pnlDestruirTorre.SetActive(true);
+        }        
     }
 
     public void DefinirTorre(Torre novaTorre)
@@ -22,6 +35,19 @@ public class BotaoTorreMapa : MonoBehaviour
         ).icone;
         estaComTorre = true;
         txtPlus.SetActive(false);
+    }
+
+    public void DestruirTorre()
+    {
+        estaComTorre = false;
+        iconeTorre.sprite = null;
+        txtPlus.SetActive(true);
+        int precoRetornado = (int)(GameManager.GameData.torres.Find(
+            torreSO => torreSO.torre.id == torreAtiva.id
+        ).torre.preco * Constants.PORCENTAGEM_RETORNO_TORRE_DESTRUIDA);
+        CanvasGameMng.PannelGamePlay.AdicionarMoedas(precoRetornado);
+        torreAtiva = null;
+        pnlDestruirTorre.SetActive(false);
     }
 
     // Update is called once per frame

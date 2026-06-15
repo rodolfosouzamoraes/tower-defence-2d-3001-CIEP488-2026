@@ -36,6 +36,10 @@ public class CanvasGameMng : MonoBehaviour
     {
         paineis[(int)painel].SetActive(true);
     }
+    public void DesativarPainelEspecifico(EnumPaineisGame painel)
+    {
+        paineis[(int)painel].SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()

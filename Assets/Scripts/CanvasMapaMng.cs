@@ -31,4 +31,17 @@ public class CanvasMapaMng : MonoBehaviour
         CanvasGameMng.Instance.AtivarPainelEspecifico(EnumPaineisGame.EscolhaTorre);
         idTorreSelecionada = idTorre;
     }
+
+    public void DefinirTorre(Torre torreDefinida)
+    {
+        //Encontrar o botão que solicitou a torre
+        foreach (BotaoTorreMapa botao in todasAsTorresDoMapa)
+        {
+            if(botao.id == idTorreSelecionada)
+            {
+                botao.DefinirTorre(torreDefinida);
+                return;
+            }
+        }
+    }
 }

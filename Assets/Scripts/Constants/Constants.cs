@@ -6,4 +6,5 @@ public static class Constants
     public const string MENSAGEM_TORRE_OBRIGATORIO = "É necessário ter pelo menos uma torre comprada e ativa para iniciar o nível.";
     public const int VALOR_INICIAL_MOEDAS_NIVEL = 500;
     public const int VALOR_VIDA_JOGADOR = 100;
+    public const float PORCENTAGEM_RETORNO_TORRE_DESTRUIDA = 0.25f;
 }

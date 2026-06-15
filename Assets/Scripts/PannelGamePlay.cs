@@ -14,6 +14,11 @@ public class PannelGamePlay : MonoBehaviour
     [SerializeField] private int inimigosRestantesNivel;
     private int contagemTempo;
     private int vidaAtualJogador;
+
+    public int MoedasNivel
+    {
+        get { return moedasAtuaisNivel;}
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +41,13 @@ public class PannelGamePlay : MonoBehaviour
     public void DebitarMoedas(int debito)
     {
         moedasAtuaisNivel -= debito;
+        txtMoedas.text = $"${moedasAtuaisNivel}";
+    }
+
+    public void AdicionarMoedas(int moedas)
+    {
+        moedasAtuaisNivel += moedas;
+        txtMoedas.text = $"${moedasAtuaisNivel}";
     }
 
     // Update is called once per frame

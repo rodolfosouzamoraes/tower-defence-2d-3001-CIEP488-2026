@@ -15,6 +15,11 @@ public class BotaoTorreMapa : MonoBehaviour
         get { return estaComTorre; }
     }
 
+    public Torre TorreAtiva
+    {
+        get { return torreAtiva; }
+    }
+
     public void AbrirSelecaoTorres()
     {
         if(estaComTorre == false)

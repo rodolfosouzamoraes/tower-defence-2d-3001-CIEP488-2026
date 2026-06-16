@@ -7,6 +7,7 @@ public class BotaoTorreMapa : MonoBehaviour
     public Image iconeTorre;
     public GameObject txtPlus;
     public GameObject pnlDestruirTorre;
+    public AreaTorre areaTorre;
     private Torre torreAtiva;
     private bool estaComTorre;
 
@@ -40,6 +41,7 @@ public class BotaoTorreMapa : MonoBehaviour
         ).icone;
         estaComTorre = true;
         txtPlus.SetActive(false);
+        areaTorre.AtivarTorreta();
     }
 
     public void DestruirTorre()
@@ -53,6 +55,7 @@ public class BotaoTorreMapa : MonoBehaviour
         CanvasGameMng.PannelGamePlay.AdicionarMoedas(precoRetornado);
         torreAtiva = null;
         pnlDestruirTorre.SetActive(false);
+        areaTorre.DesativarTorreta();
     }
 
     // Update is called once per frame

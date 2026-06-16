@@ -42,7 +42,7 @@ public class TorretaControle : MonoBehaviour
             GameObject novoProjetil = Instantiate(projetil, null);
             novoProjetil.transform.position = transform.position;
             novoProjetil.transform.rotation = transform.rotation;
-            //novoProjetil.GetComponent<ProjetilControle>()
+            novoProjetil.GetComponent<ProjetilControle>().Init(danoTorreta/100);
         }
     }
 

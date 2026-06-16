@@ -13,7 +13,7 @@ public class DanoInimigo : MonoBehaviour
         sldVidaInimigo.value = vidaInimigo;
     }
 
-    public void EfetuarDanoAoInimigo(int valorDano)
+    public void EfetuarDanoAoInimigo(float valorDano)
     {
         vidaInimigo -= valorDano;
         if (vidaInimigo <= 0) {
@@ -27,9 +27,13 @@ public class DanoInimigo : MonoBehaviour
         sldVidaInimigo.value = vidaInimigo;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.tag == "Projetil")
+        {
+            float valorDano = collision.GetComponent<ProjetilControle>().Dano;
+            EfetuarDanoAoInimigo(valorDano);
+            Destroy(collision.gameObject);
+        }
     }
 }

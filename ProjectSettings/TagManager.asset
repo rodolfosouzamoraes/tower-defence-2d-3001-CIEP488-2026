@@ -13,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Caminho
+  - CanvasMapa
   - 
   - 
   - 
@@ -42,6 +42,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: CanvasMapa
+    uniqueID: 1819691159
+    locked: 0
+  - name: Inimigo
+    uniqueID: 624318617
     locked: 0
   m_RenderingLayers:
   - Default

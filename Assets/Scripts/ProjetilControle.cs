@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class ProjetilControle : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float dano;
+    public float Dano
     {
-        
+        get { return dano; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init(float porcentagemDano)
     {
-        
+        dano = Constants.VALOR_PADRAO_DANO_PROJETIL * porcentagemDano;
     }
 }

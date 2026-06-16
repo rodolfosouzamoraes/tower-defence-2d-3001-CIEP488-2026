@@ -61,6 +61,11 @@ public class AreaTorre : MonoBehaviour
         
     }
 
+    public void DesativarTorreta()
+    {
+        torreta.DesativarTorreta();
+    }
+
     // Update is called once per frame
     void Update()
     {

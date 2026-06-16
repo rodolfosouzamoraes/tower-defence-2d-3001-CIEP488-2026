@@ -7,4 +7,5 @@ public static class Constants
     public const int VALOR_INICIAL_MOEDAS_NIVEL = 500;
     public const int VALOR_VIDA_JOGADOR = 100;
     public const float PORCENTAGEM_RETORNO_TORRE_DESTRUIDA = 0.25f;
+    public const float VALOR_PADRAO_DANO_PROJETIL = 100f;
 }

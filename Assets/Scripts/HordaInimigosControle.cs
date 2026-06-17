@@ -25,8 +25,8 @@ public class HordaInimigosControle : MonoBehaviour
     void Update()
     {
         //Lógica do instanciamento dos inimigos
-        if (Time.timeSinceLevelLoad > tempoProximoInimigo) {
-            tempoProximoInimigo = Time.timeSinceLevelLoad + tempoProximoInimigo;
+        if (Time.timeSinceLevelLoad > tempoProximoInimigo && inimigosDoNivel.Count>0) {
+            tempoProximoInimigo = Time.timeSinceLevelLoad + tempoNovoInimigo;
 
             var inimigoId = new System.Random().Next(0, inimigosDoNivel.Count);
             inimigosDoNivel[inimigoId].totalInstanciados++;

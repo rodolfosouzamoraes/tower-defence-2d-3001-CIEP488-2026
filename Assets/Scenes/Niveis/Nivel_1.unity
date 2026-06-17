@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   mapaMng: {fileID: 1322082324}
-  tempoNovoInimigo: 0.5
+  tempoNovoInimigo: 0.75
   inimigosDoNivel:
   - inimigo: {fileID: 8842948308539893638, guid: 92c8d56183e5bd6478a8c7b5728ba9a1, type: 3}
     quantidade: 10

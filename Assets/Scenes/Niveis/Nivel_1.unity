@@ -2888,6 +2888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dabe0333e5a87ca40a16c287102e5baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  mapaMng: {fileID: 1322082324}
   tempoNovoInimigo: 0.5
   inimigosDoNivel:
   - inimigo: {fileID: 8842948308539893638, guid: 92c8d56183e5bd6478a8c7b5728ba9a1, type: 3}

@@ -10,6 +10,12 @@ public class BotaoTorreMapa : MonoBehaviour
     public AreaTorre areaTorre;
     private Torre torreAtiva;
     private bool estaComTorre;
+    private CanvasMapaMng mapaMng;
+
+    private void Start()
+    {
+        mapaMng = GetComponentInParent<CanvasMapaMng>();    
+    }
 
     public bool EstaComTorre
     {
@@ -25,7 +31,7 @@ public class BotaoTorreMapa : MonoBehaviour
     {
         if(estaComTorre == false)
         {
-            CanvasMapaMng.Instance.ExibirTorresDisponiveis(id);
+            mapaMng.ExibirTorresDisponiveis(id);
         }
         else
         {

@@ -14,6 +14,7 @@ public class ItemTorreGameplay : MonoBehaviour
     public Color corOn;
     public Color corOff;
     private Torre torre;
+    private CanvasMapaMng mapaMng;
     public Torre Torre { set { torre = value; } get { return torre; } }
 
     public void Init(Torre novaTorre, Sprite icone)
@@ -25,6 +26,7 @@ public class ItemTorreGameplay : MonoBehaviour
         txtVelocidade.text = $"Velocidade: {(int)torre.velocidadeAtaque}";
         txtAtaque.text = $"Ataque: {(int)torre.poderAtaque}";
         txtPreco.text = $"${torre.preco}";
+        mapaMng = FindFirstObjectByType<CanvasMapaMng>();
     }
 
     private void Update()
@@ -48,7 +50,7 @@ public class ItemTorreGameplay : MonoBehaviour
             //Debitar as moedas
             CanvasGameMng.PannelGamePlay.DebitarMoedas(torre.preco);
             //Ativar a torre no botão que solicitou a nova torre
-            CanvasMapaMng.Instance.DefinirTorre(torre);
+            mapaMng.DefinirTorre(torre);
             //Desativar tela de escolhas
             CanvasGameMng.Instance.DesativarPainelEspecifico(EnumPaineisGame.EscolhaTorre);
         }

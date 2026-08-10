@@ -29,7 +29,7 @@ public class TorretaControle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (habilitarTiro == false) return;
+        if (habilitarTiro == false || CanvasGameMng.PannelGamePlay.FimDeJogo == true) return;
         ApontarParaAlvo();
         AtirarProjetil();
     }

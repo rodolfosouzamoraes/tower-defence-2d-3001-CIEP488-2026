@@ -8,4 +8,6 @@ public static class Constants
     public const int VALOR_VIDA_JOGADOR = 100;
     public const float PORCENTAGEM_RETORNO_TORRE_DESTRUIDA = 0.25f;
     public const float VALOR_PADRAO_DANO_PROJETIL = 100f;
+    public const float PORCENTAGEM_DANO_INIMIGO = 0.05f;
+    public const float TEMPO_ESPERA_INICIAL_GAMEPLAY = 5;
 }

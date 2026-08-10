@@ -11,14 +11,31 @@ public class HordaInimigosControle : MonoBehaviour
     private float tempoProximoInimigo;
     private int contagemInimigosInstanciados = 0;
     private int maximoInimigosMapa = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public int MaximoInimigosMapa
     {
-        tempoProximoInimigo = Time.timeSinceLevelLoad + tempoNovoInimigo;
-        foreach(var inimigo in inimigosDoNivel)
+        get { return maximoInimigosMapa; }
+    }
+
+    public int ContagemInimigos
+    {
+        get { return contagemInimigosInstanciados; }
+    }
+
+    private void Awake()
+    {
+        contagemInimigosInstanciados = 0;
+        foreach (var inimigo in inimigosDoNivel)
         {
             maximoInimigosMapa += inimigo.quantidade;
         }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        tempoProximoInimigo = Time.timeSinceLevelLoad + tempoNovoInimigo + Constants.TEMPO_ESPERA_INICIAL_GAMEPLAY;
+        CanvasGameMng.PannelGamePlay.AtualizarInimigoUI(contagemInimigosInstanciados, maximoInimigosMapa);
     }
 
     // Update is called once per frame
@@ -34,6 +51,7 @@ public class HordaInimigosControle : MonoBehaviour
             novoInimigo.GetComponent<InimigoIA>().DefinirNovoDestino(mapaMng.primeiroDestino);
             novoInimigo.transform.position = hordaInicio.transform.position;
             contagemInimigosInstanciados++;
+            CanvasGameMng.PannelGamePlay.AtualizarInimigoUI(contagemInimigosInstanciados, maximoInimigosMapa);
             if (inimigosDoNivel[inimigoId].quantidade == inimigosDoNivel[inimigoId].totalInstanciados)
             {
                 inimigosDoNivel.Remove(inimigosDoNivel[inimigoId]);

@@ -222,6 +222,13 @@ public static class DBMng
         return poderEncontrado;
     }
 
+    public static Poder[] ObterTodosPoderesPlayer()
+    {
+        Jogador jogador = CarregarDadosJogador();
+        Poder[] poderesEncontrados = jogador.poderesComprados.ToArray();
+        return poderesEncontrados;
+    }
+
     public static bool PossuiTorre(int id)
     {
         Jogador jogador = CarregarDadosJogador();
@@ -317,5 +324,12 @@ public static class DBMng
     {
         Jogador jogador = CarregarDadosJogador();
         return jogador.niveisCompletados.ToArray();
+    }
+
+    public static int ObterMelhorPontuacaoNivel(int idNivel)
+    {
+        Jogador jogador = CarregarDadosJogador();
+        Nivel nivel = jogador.niveisCompletados.Find(n => n.id == idNivel);
+        return nivel != null ? nivel.melhorPontuacao : 0;
     }
 }

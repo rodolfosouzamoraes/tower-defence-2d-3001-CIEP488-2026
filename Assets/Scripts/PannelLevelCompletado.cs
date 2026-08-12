@@ -32,14 +32,26 @@ public class PannelLevelCompletado : MonoBehaviour
         novoNivel.totalInimigos = totalInimigosMortosPeloJogador;
         novoNivel.totalMoedasColetadas = totalMoedasGanhasMapa;
         novoNivel.tempoTotal = tempoTotalMapa;
-        novoNivel.melhorPontuacao = melhorPontuacao;
+        novoNivel.melhorPontuacao = pontuacaoFinal;
         novoNivel.completado = true;
         DBMng.AdicionarNivel(novoNivel);
+        txtMelhorPontuacao.text = DBMng.ObterMelhorPontuacaoNivel(novoNivel.id).ToString();
+    }
+    public void ReiniciarJogo()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Sair()
     {
-        
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void ProximoNivel()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

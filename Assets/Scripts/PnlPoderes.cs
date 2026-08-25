@@ -8,7 +8,7 @@ public class PnlPoderes : MonoBehaviour
     private Animator animator;
     private bool estaAberto = false;
 
-    private Poder[] poderesPlayer;
+    [SerializeField] private Poder[] poderesPlayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,6 +34,20 @@ public class PnlPoderes : MonoBehaviour
             estaAberto = false;
         }
 
+    }
+
+    public void InvocarPoder(int id)
+    {
+        switch (id)
+        {
+            case 1:
+                break;
+            case 2:
+                CanvasGameMng.PannelGamePlay.IncrementarVidaJogador(Constants.PORCENTAGEM_RECUPERACAO_VIDA);
+                break;
+            case 3:
+                break;
+        }
     }
     
 }

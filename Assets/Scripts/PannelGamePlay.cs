@@ -100,6 +100,17 @@ public class PannelGamePlay : MonoBehaviour
         sldVida.value = vidaAtualJogador;
     }
 
+    public void IncrementarVidaJogador(float porcentagem)
+    {
+        if (fimDeJogo == true) return;
+        vidaAtualJogador += Constants.VALOR_VIDA_JOGADOR * porcentagem; // 0.5
+        if (vidaAtualJogador > Constants.VALOR_VIDA_JOGADOR)
+        {
+            vidaAtualJogador = Constants.VALOR_VIDA_JOGADOR;
+        }
+        sldVida.value = vidaAtualJogador;
+    }
+
     public void ContarInimigoMorto()
     {
         if (fimDeJogo == true) return;

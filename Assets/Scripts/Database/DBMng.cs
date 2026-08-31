@@ -142,10 +142,9 @@ public static class DBMng
                 }
                 else
                 {
-                    jogador.poderesComprados.Remove(poderJogador); //Remover o poder antigo da lista de poderes do jogador para atualizar a quantidade
                     poderJogador.quantidade = Constants.LIMITE_MAXIMO_PODERES; //Definir a quantidade do poder para o limite máximo
                     jogador.totalMoedas -= novoPoder.preco; //Deduzir o preço do poder das moedas do jogador
-                    jogador.poderesComprados.Add(poderJogador); //Adicionar o poder atualizado à lista de poderes do jogador
+                    jogador.poderesComprados[jogador.poderesComprados.FindIndex(p => p.id == poderJogador.id)] = poderJogador;
                     SalvarDadosJogador(jogador); //Salvar os dados atualizados do jogador
                     Debug.Log("Novo poder comprado!");
                     return true;
@@ -164,21 +163,27 @@ public static class DBMng
         }
     }
 
-    public static bool ConsumirPoder(Poder poderConsumido)
+    public static bool ConsumirPoder(int idPoder)
     {
         //Buscar os dados do jogador
         Jogador jogador = CarregarDadosJogador();
 
         //Verificar se o poder existe na lista de poderes do jogador
-        Poder poderExistente = jogador.poderesComprados.Find(poder => poder.id == poderConsumido.id);
+        Poder poderExistente = jogador.poderesComprados.Find(poder => poder.id == idPoder);
 
         if (poderExistente == null) {
             Debug.LogWarning("O poder não foi encontrado na lista de poderes do jogador.");
             return false;
         }
+        else if(poderExistente.quantidade <= 0)
+        {
+            Debug.LogWarning("Jogador não possui uma quantidade para usar o poder.");
+            return false;
+        }
 
-        //Remover o poder consumido da lista de poderes do jogador
-        jogador.poderesComprados.Remove(poderExistente);
+        poderExistente.quantidade--; //Reduzir a quantidade do poder em 1
+
+        jogador.poderesComprados[jogador.poderesComprados.FindIndex(p => p.id == idPoder)] = poderExistente;
 
         //Salvar os dados atualizados do jogador
         SalvarDadosJogador(jogador);

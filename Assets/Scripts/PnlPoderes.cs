@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PnlPoderes : MonoBehaviour
 {
     [SerializeField] Image[] imgBtns;
+    [SerializeField] GameObject[] btnBloqueios;
 
     private Animator animator;
     private bool estaAberto = false;
@@ -14,11 +15,19 @@ public class PnlPoderes : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         poderesPlayer = DBMng.ObterTodosPoderesPlayer();
-        for (int i = 0; i < poderesPlayer.Length; i++)
+        BloquearPoderes();
+        for (int i = 1; i < GameManager.GameData.poderes.Count; i++)
         {
             imgBtns[i].sprite = GameManager.GameData.poderes[i].icone;
         }
 
+        for (int i = 0; i < poderesPlayer.Length; i++)
+        {
+            if(poderesPlayer[i].quantidade > 0)
+            {
+                btnBloqueios[poderesPlayer[i].id].SetActive(false);
+            }            
+        }
     }
 
     public void ExibirOuOcultarPainel()
@@ -41,13 +50,34 @@ public class PnlPoderes : MonoBehaviour
         switch (id)
         {
             case 1:
+                if (btnBloqueios[id].activeSelf == true) return;
+
                 break;
             case 2:
-                CanvasGameMng.PannelGamePlay.IncrementarVidaJogador(Constants.PORCENTAGEM_RECUPERACAO_VIDA);
+                if (btnBloqueios[id].activeSelf == true) return;
+                if (DBMng.ConsumirPoder(id) == true)
+                {
+                    CanvasGameMng.PannelGamePlay.IncrementarVidaJogador(Constants.PORCENTAGEM_RECUPERACAO_VIDA);
+                    btnBloqueios[id].SetActive(true);
+                }                
                 break;
             case 3:
+                if (btnBloqueios[id].activeSelf == true) return;
+
                 break;
         }
+
+        poderesPlayer = DBMng.ObterTodosPoderesPlayer();
     }
-    
+
+    private void BloquearPoderes()
+    {
+        foreach(var btn in btnBloqueios)
+        {
+            if(btn != null)
+            {
+                btn.SetActive(true);
+            }
+        }
+    }    
 }

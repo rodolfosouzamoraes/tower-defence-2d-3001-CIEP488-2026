@@ -4550,6 +4550,11 @@ MonoBehaviour:
   - {fileID: 1045638574}
   - {fileID: 629297623}
   - {fileID: 1066152910}
+  btnBloqueios:
+  - {fileID: 0}
+  - {fileID: 1140618116}
+  - {fileID: 2096116804}
+  - {fileID: 1952823759}
   poderesPlayer: []
 --- !u!1 &918570776
 GameObject:
@@ -5840,7 +5845,7 @@ GameObject:
   - component: {fileID: 1140618119}
   - component: {fileID: 1140618118}
   m_Layer: 5
-  m_Name: imgBloqueado
+  m_Name: imgBloqueado1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10011,7 +10016,7 @@ GameObject:
   - component: {fileID: 1952823762}
   - component: {fileID: 1952823761}
   m_Layer: 5
-  m_Name: imgBloqueado
+  m_Name: imgBloqueado3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11147,7 +11152,7 @@ GameObject:
   - component: {fileID: 2096116807}
   - component: {fileID: 2096116806}
   m_Layer: 5
-  m_Name: imgBloqueado
+  m_Name: imgBloqueado2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

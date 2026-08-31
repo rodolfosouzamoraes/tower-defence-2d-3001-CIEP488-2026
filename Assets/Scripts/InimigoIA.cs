@@ -5,7 +5,13 @@ public class InimigoIA : MonoBehaviour
     public float velocidade;
     private Waypoint destino;
     private bool habilitaMovimentacao;
-    
+    private float velocidadeOriginal;
+
+    private void Start()
+    {
+        velocidadeOriginal = velocidade;
+    }
+
     public void DefinirNovoDestino(Waypoint novoDestino)
     {
         destino = novoDestino;
@@ -32,5 +38,15 @@ public class InimigoIA : MonoBehaviour
                 destino = destino.ObterProximoDestino();
             }            
         }
+    }
+
+    public void CongelarInimigo()
+    {
+        velocidade = 0;
+    }
+
+    public void DescongelarInimigo()
+    {
+        velocidade = velocidadeOriginal;
     }
 }

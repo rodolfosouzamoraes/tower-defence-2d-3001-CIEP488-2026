@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class HordaInimigosControle : MonoBehaviour
     private float tempoProximoInimigo;
     private int contagemInimigosInstanciados = 0;
     private int maximoInimigosMapa = 0;
+    private List<GameObject> listaInimigosInstanciados;
+    private bool tempoCongelado;
 
     public int MaximoInimigosMapa
     {
@@ -29,6 +32,7 @@ public class HordaInimigosControle : MonoBehaviour
         {
             maximoInimigosMapa += inimigo.quantidade;
         }
+        listaInimigosInstanciados = new List<GameObject>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,6 +45,7 @@ public class HordaInimigosControle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (tempoCongelado == true) return;
         //Lógica do instanciamento dos inimigos
         if (Time.timeSinceLevelLoad > tempoProximoInimigo && inimigosDoNivel.Count>0) {
             tempoProximoInimigo = Time.timeSinceLevelLoad + tempoNovoInimigo;
@@ -51,11 +56,53 @@ public class HordaInimigosControle : MonoBehaviour
             novoInimigo.GetComponent<InimigoIA>().DefinirNovoDestino(mapaMng.primeiroDestino);
             novoInimigo.transform.position = hordaInicio.transform.position;
             contagemInimigosInstanciados++;
+            listaInimigosInstanciados.Add(novoInimigo);
             CanvasGameMng.PannelGamePlay.AtualizarInimigoUI(contagemInimigosInstanciados, maximoInimigosMapa);
             if (inimigosDoNivel[inimigoId].quantidade == inimigosDoNivel[inimigoId].totalInstanciados)
             {
                 inimigosDoNivel.Remove(inimigosDoNivel[inimigoId]);
             }
         }
+    }
+
+    private void RemoverInimigoLista(GameObject inimigo)
+    {
+        if (listaInimigosInstanciados.Contains(inimigo))
+        {
+            listaInimigosInstanciados.Remove(inimigo);
+        }
+    }
+
+    public void DestruirInimigosInstanciados()
+    {
+        foreach(var inimigo in listaInimigosInstanciados.ToList())
+        {
+            if (inimigo.activeSelf == false) return;
+            RemoverInimigoLista(inimigo);
+            inimigo.GetComponent<DanoInimigo>().DestruirInimigo();
+        }
+    }
+
+    public void CongelarInimigos()
+    {
+        tempoCongelado = true;
+        StartCoroutine(TempoCongelamentoInimigos());
+    }
+
+    IEnumerator TempoCongelamentoInimigos()
+    {
+        foreach(var inimigo in listaInimigosInstanciados)
+        {
+            inimigo.GetComponent<InimigoIA>().CongelarInimigo();
+        }
+
+        yield return new WaitForSeconds(Constants.TEMPO_CONGELAMENTO_INIMIGOS);
+
+        foreach(var inimigo in listaInimigosInstanciados)
+        {
+            inimigo.GetComponent<InimigoIA>().DescongelarInimigo();
+        }
+
+        tempoCongelado = false;
     }
 }

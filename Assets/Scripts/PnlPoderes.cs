@@ -51,7 +51,11 @@ public class PnlPoderes : MonoBehaviour
         {
             case 1:
                 if (btnBloqueios[id].activeSelf == true) return;
-
+                if(DBMng.ConsumirPoder(id) == true)
+                {
+                    FindFirstObjectByType<HordaInimigosControle>().DestruirInimigosInstanciados();
+                    btnBloqueios[id].SetActive(true);
+                }
                 break;
             case 2:
                 if (btnBloqueios[id].activeSelf == true) return;
@@ -63,7 +67,11 @@ public class PnlPoderes : MonoBehaviour
                 break;
             case 3:
                 if (btnBloqueios[id].activeSelf == true) return;
-
+                if (DBMng.ConsumirPoder(id) == true)
+                {
+                    FindFirstObjectByType<HordaInimigosControle>().CongelarInimigos();
+                    btnBloqueios[id].SetActive(true);
+                }
                 break;
         }
 

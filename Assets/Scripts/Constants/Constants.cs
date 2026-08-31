@@ -11,4 +11,5 @@ public static class Constants
     public const float PORCENTAGEM_DANO_INIMIGO = 0.05f;
     public const float TEMPO_ESPERA_INICIAL_GAMEPLAY = 5;
     public const float PORCENTAGEM_RECUPERACAO_VIDA = 0.5f;
+    public const float TEMPO_CONGELAMENTO_INIMIGOS = 3f;
 }

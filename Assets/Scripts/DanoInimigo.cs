@@ -18,16 +18,21 @@ public class DanoInimigo : MonoBehaviour
         if (CanvasGameMng.PannelGamePlay.FimDeJogo == true) return;
         vidaInimigo -= valorDano;
         if (vidaInimigo <= 0) {
-            vidaInimigo = 0;
-
-            //Gerar Moedas para o Player
-            CanvasGameMng.PannelGamePlay.AdicionarMoedas(valorInimigo);
-            CanvasGameMng.PannelGamePlay.TotalInimigosMortosPeloJogador += 1;
-            CanvasGameMng.PannelGamePlay.ContarInimigoMorto();
-
-            Destroy(gameObject);
+            DestruirInimigo();
         }
         sldVidaInimigo.value = vidaInimigo;
+    }
+
+    public void DestruirInimigo()
+    {
+        vidaInimigo = 0;
+
+        //Gerar Moedas para o Player
+        CanvasGameMng.PannelGamePlay.AdicionarMoedas(valorInimigo);
+        CanvasGameMng.PannelGamePlay.TotalInimigosMortosPeloJogador += 1;
+        CanvasGameMng.PannelGamePlay.ContarInimigoMorto();
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
